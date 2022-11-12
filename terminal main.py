@@ -1,6 +1,10 @@
 #  MEU DINHEIRO 0.0.4
 # modo terminal
 
+#criado por Lucas gabriel
+# github : github.com/Lucas836
+# instagra : @lucas_git
+
 import sqlite3
 import os
 from datetime import datetime
