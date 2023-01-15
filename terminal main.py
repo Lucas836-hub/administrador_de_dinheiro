@@ -2,8 +2,8 @@
 # modo terminal
 
 #criado por Lucas gabriel
-# github : github.com/Lucas836
-# instagra : @lucas_git
+# github : https://github.com/Lucas836-hub/
+# instagram : @lucas_git
 
 import sqlite3
 import os
