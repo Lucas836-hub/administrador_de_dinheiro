@@ -9,9 +9,16 @@ import sqlite3
 import os
 from datetime import datetime
 from random import *
-
+import update_file # CHAMANDO O ATUALIZADOR
 class main():
 	def __init__(self):
+
+		# VERIFICANDO ATUALIZACOES
+		if update_file.check_atualizacao("https://github.com/Lucas836-hub/administrador_de_dinheiro"):
+			self.titulo("ATUALIZANDO")
+			# ATUALIZANDO O SCRIPT LOCAL
+			update_file.atualizar("https://github.com/Lucas836-hub/administrador_de_dinheiro")
+
 		self.banco = sqlite3.connect("data_pront.db")
 		self.cursor = self.banco.cursor()
 		
@@ -51,7 +58,7 @@ class main():
 		self.limpar()
 		self.titulo("MENU PRINCIPAL")
 		self.stats()
-		op=["adicionar pagamento",'adicionar um gasto','historico de recebimento','Devedores','sair']
+		op=["adicionar pagamento",'adicionar um gasto','historico de recebimento','sair']
 		print(f'Digite 1 para {op[0].title()}')
 		for c in range(1,len(op)):
 			print(f"       {c+1} para {op[c].title()}")
@@ -65,7 +72,11 @@ class main():
 		if (resp == 2):
 			self.hist_receb()
 		if resp == 3:
-			self.devedores()
+			#  "EM DESENVOLVIMENTO ..."
+			self.banco.close()
+			print('\033[36mPrograma salvo e finalizado =)\033[m')
+			exit()
+			#self.devedores()
 		if(resp == len(op)-1):
 			self.banco.close()
 			print('\033[36mPrograma salvo e finalizado =)\033[m')
