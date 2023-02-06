@@ -161,18 +161,27 @@ def atualizar(url,n_del=[]):
             if mnbv[0] == zxcv[0]:
                 if passagem_tempo(zxcv[1],mnbv[1]) :
                     desatualizados.append(zxcv[0])
-                    print("\033[92mATUALIZACAO DETECTADA\033[m")
+                    #print("\033[92mATUALIZACAO DETECTADA\033[m")
                 else:
                     atualizadso.append(zxcv[0])
-                    print("\033[91mATUALIZACAO  NAO  DETECTADA\033[m")
+                    #print("\033[91mATUALIZACAO  NAO  DETECTADA\033[m")
                 break
     if desatualizados != []:
+
+        oav=""
+        afl = url.split("/")
+        for xoe in afl[3:]:oav+="/"+xoe
+
         for trew in desatualizados:
             if trew in n_del:
                 pass
             else:
-                os.system(f"rm -f {trew}")
+                os.system(f"rm -r {trew}")
                 try :
-                    os.system(f"wget {url+'/blob/main/'+trew}")
+                    urllib.request.urlopen(f"https://raw.githubusercontent.com{oav + '/main/' + trew}")
+                    site = f"https://raw.githubusercontent.com{oav + '/main/' + trew}"
                 except:
-                    os.system(f"wget {url + '/tree/main/' + trew}")
+                    urllib.request.urlopen(f"https://raw.githubusercontent.com{oav + '/master/' + trew}")
+                    site = f"https://raw.githubusercontent.com{oav + '/master/' + trew}"
+
+                os.system(f"wget {site}")
