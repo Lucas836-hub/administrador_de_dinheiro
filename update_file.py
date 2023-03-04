@@ -67,13 +67,13 @@ def check_atualizacao(url):
 def passagem_hora(h1,h2):
     # h1 = hora do ultimo up do github
     # h2 = hora do ultimo up dos arquivos locais
-    print("github ",h1)
-    print("arquivo ",h2)
+    #print("github ",h1)
+    #print("arquivo ",h2)
     if int(int(h1[0])-int(h2[0])) > 0 or int(int(h1[1])- int(h2[1])) > 0 and int(int(h1[0])-int(h2[0])) >= 0 or int(int(h1[1])- int(h2[1])) >= 0 and int(int(h1[0])-int(h2[0])) >= 0 and int(int(h1[2])-int(h2[2])) > 0 :
-        print(f"passagem hora  {int(h1[0])-int(h2[0])} {int(int(h1[1])-int(h2[1]))} {int(int(h1[2])-int(h2[2]))} True")
+        #print(f"passagem hora  {int(h1[0])-int(h2[0])} {int(int(h1[1])-int(h2[1]))} {int(int(h1[2])-int(h2[2]))} True")
         return True
     else:
-        print(f"passagem hora  {int(h1[0]) - int(h2[0])} {int(int(h1[1]) - int(h2[1]))} {int(int(h1[2]) - int(h2[2]))} False")
+        #print(f"passagem hora  {int(h1[0]) - int(h2[0])} {int(int(h1[1]) - int(h2[1]))} {int(int(h1[2]) - int(h2[2]))} False")
         return False
 
 def pasta_up(comand):
@@ -266,4 +266,7 @@ def atualizar(url,n_del=[]):
                 os.system(f"wget {site}")
         pasta_up("UP")
 
-atualizar("https://github.com/Lucas836-hub/repository_up",["README.md","requirements.txt"])
+try:
+    atualizar("https://github.com/Lucas836-hub/repository_up",["README.md","requirements.txt"])
+except:
+    pass
