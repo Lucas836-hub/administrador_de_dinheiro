@@ -2,7 +2,10 @@
 # github : https://github.com/Lucas836-hub/
 # instagram : @lucas_git
 
-# se auto atualizar
+# se auto atualizar ok
+# ver a defazagem de tempo do github = pegar localizaco , ver o deley do pais
+# barra de progresso e tamanho do arquivo
+# VERIFICAR PASTAS NO GITHUB    
 
 import os
 from datetime import datetime
@@ -64,11 +67,13 @@ def check_atualizacao(url):
 def passagem_hora(h1,h2):
     # h1 = hora do ultimo up do github
     # h2 = hora do ultimo up dos arquivos locais
-    #print("h1 ",h1)
-    #print("h2 ",h2)
-    if int(int(h1[0])-int(h2[0])) < 0 or int(int(h1[1])-int(h2[1])) < 0 or int(int(h1[2])-int(h2[2])) < 0 :
+    print("github ",h1)
+    print("arquivo ",h2)
+    if int(int(h1[0])-int(h2[0])) > 0 or int(int(h1[1])- int(h2[1])) > 0 and int(int(h1[0])-int(h2[0])) >= 0 or int(int(h1[1])- int(h2[1])) >= 0 and int(int(h1[0])-int(h2[0])) >= 0 and int(int(h1[2])-int(h2[2])) > 0 :
+        print(f"passagem hora  {int(h1[0])-int(h2[0])} {int(int(h1[1])-int(h2[1]))} {int(int(h1[2])-int(h2[2]))} True")
         return True
     else:
+        print(f"passagem hora  {int(h1[0]) - int(h2[0])} {int(int(h1[1]) - int(h2[1]))} {int(int(h1[2]) - int(h2[2]))} False")
         return False
 
 def pasta_up(comand):
@@ -110,9 +115,11 @@ def passagem_tempo(a, b, c=0):
     num = [int(data[0] + data[1] + data[2] + data[3]), int(data[5] + data[6] ),int(data[8] + data[9])]
     num2 = [int(data_atual[0] + data_atual[1] + data_atual[2] + data_atual[3]), int(data_atual[5] + data_atual[6] ),int(data_atual[8] + data_atual[9])]
     resp = [num[2] - num2[2], num[1] - num2[1], num[0] - num2[0]]
-    if (resp[0] <= c and resp[1] <= 0 or resp[2] < 0 or resp[1] <= 0):
+    if (resp[0] < c and resp[1] <= 0 or resp[2] < 0 or resp[1] < 0 and resp[2] <= 0):
+        print(f"passagem tempo arquivo {a} github {b} = {resp[0]} {resp[1]} {resp[2]}")
         return True
     else:
+        print(f"passagem tempo arquivo {a} github {b} = {resp[0]} {resp[1]} {resp[2]} False")
         return False
 
 # n_del = lista de arquivos que nao poderam ser excluidos ex: banco de dados , arquivos txt com dados
@@ -212,10 +219,10 @@ def atualizar(url,n_del=[]):
     for mnbv in arquivos_datas_local:
         # VER SE A DATA DOS ARQUIVOS COINCIDEM
         for zxcv in git_final:
-            print(f"\033[95mnbv {mnbv[0]} zxcv {zxcv[0]}\033[m")
+            #print(f"\033[95mnbv {mnbv[0]} zxcv {zxcv[0]}\033[m")
 
             if mnbv[0] == zxcv[0]  :
-                if passagem_tempo(zxcv[1],mnbv[1]) :
+                if passagem_tempo(mnbv[1],zxcv[1]) :
                     desatualizados.append(zxcv[0])
                     #print("\033[92mATUALIZACAO DETECTADA\033[m")
 
@@ -239,8 +246,8 @@ def atualizar(url,n_del=[]):
         for xoe in afl[3:]:oav+="/"+xoe
 
         for trew in desatualizados:
-            print(f"\033[93mdesatualizados {desatualizados}\033[m")
-            print(f"\033[94matualizados {atualizadso}\033[m")
+            #print(f"\033[93mdesatualizados {desatualizados}\033[m")
+            #print(f"\033[94matualizados {atualizadso}\033[m")
             if trew in n_del:
                 pass
             else:
@@ -258,3 +265,5 @@ def atualizar(url,n_del=[]):
 
                 os.system(f"wget {site}")
         pasta_up("UP")
+
+atualizar("https://github.com/Lucas836-hub/repository_up",["README.md","requirements.txt"])
