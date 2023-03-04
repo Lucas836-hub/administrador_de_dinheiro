@@ -12,12 +12,14 @@ from random import *
 import update_file # CHAMANDO O ATUALIZADOR
 class main():
 	def __init__(self):
-
-		# VERIFICANDO ATUALIZACOES
-		if update_file.check_atualizacao("https://github.com/Lucas836-hub/administrador_de_dinheiro"):
-			self.titulo("ATUALIZANDO")
-			# ATUALIZANDO O SCRIPT LOCAL
-			update_file.atualizar("https://github.com/Lucas836-hub/administrador_de_dinheiro")
+		try:
+			# VERIFICANDO ATUALIZACOES
+			if update_file.check_atualizacao("https://github.com/Lucas836-hub/administrador_de_dinheiro"):
+				self.titulo("ATUALIZANDO")
+				# ATUALIZANDO O SCRIPT LOCAL
+				update_file.atualizar("https://github.com/Lucas836-hub/administrador_de_dinheiro")
+		except:
+			pass
 
 		self.banco = sqlite3.connect("data_pront.db")
 		self.cursor = self.banco.cursor()
