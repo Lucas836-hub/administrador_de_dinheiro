@@ -16,6 +16,11 @@ from bs4 import BeautifulSoup
 
 # url = repositorio github para ser monitorado ex: https://github.com/Lucas836-hub/repository_up/
 def check_atualizacao(url):
+    """
+    Verifica se teve alguma atualização do repositorio passado , comparando os arquivos locais com os do repositorio
+    :param url: url do repositorio para ser analizado
+    :return: True caso tenha uma atualização ou False caso não.
+    """
     pasta_up("C")
     hj=list(url)
     if hj[-1] != "/":
@@ -65,10 +70,12 @@ def check_atualizacao(url):
     return vai_atualizar
 
 def passagem_hora(h1,h2):
-    # h1 = hora do ultimo up do github
-    # h2 = hora do ultimo up dos arquivos locais
-    #print("github ",h1)
-    #print("arquivo ",h2)
+    """"
+    h1 = hora do ultimo up do github
+    h2 = hora do ultimo up dos arquivos locais
+    :return True ou False
+    """
+
     if int(int(h1[0])-int(h2[0])) > 0 or int(int(h1[1])- int(h2[1])) > 0 and int(int(h1[0])-int(h2[0])) >= 0 or int(int(h1[1])- int(h2[1])) >= 0 and int(int(h1[0])-int(h2[0])) >= 0 and int(int(h1[2])-int(h2[2])) > 0 :
         #print(f"passagem hora  {int(h1[0])-int(h2[0])} {int(int(h1[1])-int(h2[1]))} {int(int(h1[2])-int(h2[2]))} True")
         return True
@@ -102,8 +109,18 @@ def pasta_up(comand):
         #print(f"\033[92mV {data_hora} bjk {bjk} gh {gh} arquivo {arquivo} ler {ler}\033[m")
         return bjk
 
-def instalador_biblioteca():#r nome da pasta requirements ou semelhante
+def instalador_biblioteca(arq=None):
+    """
+    Instala automaticamente as bibliotecas em python.
+    Caso o seu script tenha sido atualizado e seja feito a necessidade de instalação de uma nova biblioteca ,
+     essa função vai fazer a instalação da mesma de modo autônomo , caso o nome da mesma esteja dentro de um arquivo chamado requirements.txt
+     ou semenhante ou o nome do arquivo seja passado como parâmetro.
+    :return: None
+    """
+
     pst=["requirements.txt","Requirements.txt","REQUIREMENTS.txt","requerimentos.txt","Requerimentos.txt","REQUERIMENTOS.txt"]
+    if not arq == None:
+        pst.insert(0,arq)
     down=False
     for n in pst:
         if os.path.exists(n):
@@ -119,9 +136,14 @@ def instalador_biblioteca():#r nome da pasta requirements ou semelhante
                 os.system(f"pip3 install {b}")
 
 def passagem_tempo(a, b, c=0):
-    # a = data do arquivo
-    # b = data da ultima atualizacao do github
-    # c = passagem do tempo para a atualizacao por padrao 0 dias
+    """
+    Verica quanto tempo se passou.
+
+    :param a: data do arquivo arquivo local
+    :param b: data da ultima atualizacao do github
+    :param c: passagem do tempo para a atualizacao por padrao 0 dias
+    :return: True caso tenha se passdo o tempo requerido ou False caso não.
+    """
     data = list(str(a).replace("[","").replace("]","").replace("'",""))
     data_atual = list(str(b).replace("[","").replace("]","").replace("'",""))
 
@@ -137,9 +159,14 @@ def passagem_tempo(a, b, c=0):
         #print(f"passagem tempo arquivo {a} github {b} = {resp[0]} {resp[1]} {resp[2]} False")
         return False
 
-# n_del = lista de arquivos que nao poderam ser excluidos ex: banco de dados , arquivos txt com dados
-# url = repositorio github para ser feito o download ex: https://github.com/Lucas836-hub/repository_up/
 def atualizar(url,n_del=[]):
+    """
+    Vai atualizar os arquivos locais com base na url passada.
+    :param url: repositorio github para ser feito o download ex: https://github.com/Lucas836-hub/repository_up/
+    :param n_del: lista de arquivos que nao poderam ser excluidos ex: banco de dados , arquivos txt com dados
+    ex : update_file.atualizar("https://github.com/Lucas836-hub/repository_up/",["banco.db","README.md"])
+    :return:
+    """
     hj = list(url)
     if hj[-1] != "/":
         site = urllib.request.urlopen(url + "/commits/main")
@@ -282,7 +309,6 @@ def atualizar(url,n_del=[]):
 
                 os.system(f"wget {site}")
         pasta_up("UP")
-        instalador_biblioteca()
 
 try:
     atualizar("https://github.com/Lucas836-hub/repository_up",["README.md","requirements.txt"])
