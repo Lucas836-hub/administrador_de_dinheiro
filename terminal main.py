@@ -15,9 +15,17 @@ class main():
 		try:
 			# VERIFICANDO ATUALIZACOES
 			if update_file.check_atualizacao("https://github.com/Lucas836-hub/administrador_de_dinheiro"):
-				self.titulo("ATUALIZANDO")
-				# ATUALIZANDO O SCRIPT LOCAL
-				update_file.atualizar("https://github.com/Lucas836-hub/administrador_de_dinheiro")
+				self.titulo("ATENÇÃO ATUALIZAÇÃO DETECTADA")
+				while True:
+					sn=input("Você deseja atualizar ? S/N : ").strip().lower().replace("sim", "s").replace("ss", "s").replace(
+			"nao", "n").replace("não", "n").replace("nn", "n")
+					if sn =="n" or sn == "s":
+						break
+					else:
+						print("resposta invalida !!!")
+				if sn == "s":
+					update_file.atualizar("https://github.com/Lucas836-hub/administrador_de_dinheiro")
+					update_file.instalador_biblioteca()
 		except:
 			pass
 
