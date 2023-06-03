@@ -12,8 +12,6 @@ from datetime import datetime
 import urllib
 import urllib.request
 from bs4 import BeautifulSoup
-import wget
-
 
 # url = repositorio github para ser monitorado ex: https://github.com/Lucas836-hub/repository_up/
 def check_atualizacao(url):
@@ -307,7 +305,7 @@ def atualizar(url,n_del=[]):
                     urllib.request.urlopen(f"https://raw.githubusercontent.com{oav + '/master/' + trew}")
                     site = f"https://raw.githubusercontent.com{oav + '/master/' + trew}"
 
-                wget.download(site, trew)
+                os.system(f"wget {site}")
         pasta_up("UP")
 
 try:
