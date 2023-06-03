@@ -2,4 +2,3 @@ db-sqlite3
 BeautifulSoup4
 urllib
 html5lib
-wget
